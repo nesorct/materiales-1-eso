@@ -1,37 +1,264 @@
-# 🔬 Los Materiales Técnicos · 1º ESO
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1º ESO: Materiales Técnicos e Interactivos</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        h1 {
+            color: #1e3a8a;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 25px;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 15px;
+            background: #f8fafc;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #64748b;
+            transition: all 0.3s;
+        }
+        .tab-btn.active {
+            color: #2563eb;
+            border-bottom-color: #2563eb;
+            background: #eff6ff;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        /* Estilos Fase 1 */
+        .grid-materiales {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .mat-card {
+            background: #f1f5f9;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .mat-card:hover {
+            transform: scale(1.05);
+        }
+        .mat-card.selected {
+            background: #bbf7d0;
+            border-color: #22c55e;
+            color: #15803d;
+        }
+        .veredicto-box {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f8fafc;
+            border-left: 5px solid #2563eb;
+            border-radius: 4px;
+        }
+        /* Estilos Fase 2 */
+        .propiedad-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .propiedad-btn:hover {
+            background: #1d4ed8;
+        }
+        .info-propiedad {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f0fdf4;
+            border-radius: 8px;
+            border: 1px solid #bbf7d0;
+        }
+        .quiz-box {
+            margin-top: 30px;
+            background: #fff7ed;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #ffedd5;
+        }
+        .alert-success { color: #16a34a; font-weight: bold; margin-top: 10px; }
+        .alert-danger { color: #dc2626; font-weight: bold; margin-top: 10px; }
+    </style>
+</head>
+<body>
 
-Juego educativo interactivo sobre los materiales técnicos para la asignatura de Tecnología de 1º de la ESO.
+<div class="container">
+    <h1>🔬 Tecnología 1º ESO: Los Materiales Técnicos</h1>
+    
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('fase1')">Fase 1: El Juego del Náufrago</button>
+        <button class="tab-btn" onclick="switchTab('fase2')">Fase 2: Teoría y Propiedades</button>
+    </div>
 
-## 🌐 Acceder al juego
+    <!-- FASE 1 -->
+    <div id="fase1" class="tab-content active">
+        <h2>🏝️ ¡Habéis naufragado en una isla desierta!</h2>
+        <p>Para sobrevivir y poder escapar, vuestro grupo necesita construir un refugio impermeable y una balsa flotante. Solo tenéis espacio en la mochila para <strong>3 materiales</strong>. ¡Elegid sabiamente!</p>
+        
+        <div class="grid-materiales">
+            <div class="mat-card" id="mat-madera" onclick="toggleMaterial('madera', 'Madera: Es ligera, flota genial y resiste bien la flexión, pero si es fina puede romperse o pudrirse con los meses.')">Madera</div>
+            <div class="mat-card" id="mat-metal" onclick="toggleMaterial('metal', 'Metal (Acero): Es extremadamente tenaz (soporta golpes) y duro, pero pesa muchísimo para la balsa y se oxida con el agua del mar.')">Metal</div>
+            <div class="mat-card" id="mat-plastico" onclick="toggleMaterial('plastico', 'Plástico: Es 100% impermeable y muy ligero (no se hunde), pero es difícil de unir de forma resistente sin herramientas.')">Plástico</div>
+            <div class="mat-card" id="mat-ceramica" onclick="toggleMaterial('ceramica', 'Cerámica (Tejas): Soporta muy bien el calor del sol, pero es muy frágil. Al primer golpe o caída se romperá en mil pedazos.')">Cerámica</div>
+            <div class="mat-card" id="mat-textil" onclick="toggleMaterial('textil', 'Tejido/Lona: Es muy flexible y ligero, ideal para hacer la vela de la balsa o el techo del refugio si se combina con ramas.')">Textil/Tela</div>
+        </div>
 
-👉 **[Abrir el juego](https://nesorct.github.io/materiales-1-eso/)**
+        <div class="veredicto-box" id="mochila-status">
+            <h3>🎒 Vuestra mochila actual:</h3>
+            <p>Selecciona 3 materiales arriba para ver vuestras probabilidades de supervivencia...</p>
+        </div>
+    </div>
 
-Funciona en ordenador, tablet y móvil. No requiere instalación ni registro.
+    <!-- FASE 2 -->
+    <div id="fase2" class="tab-content">
+        <h2>📚 La Teoría: ¿Qué son los Materiales Técnicos?</h2>
+        <p>Un <strong>material técnico</strong> es la materia prima que los humanos transformamos para poder fabricar objetos (un árbol se transforma en tablones de madera para hacer mesas).</p>
+        <p>Cada material se comporta de forma diferente según sus <strong>propiedades</strong>. Haz clic en cada grupo para descubrir ejemplos cotidianos:</p>
+        
+        <div>
+            <button class="propiedad-btn" onclick="showProp('mecanicas', '🔩 PROPIEDADES MECÁNICAS', 'Tienen que ver con cómo reacciona el material cuando le aplicamos fuerzas.<br><br>• <strong>Dureza:</strong> Resistencia a ser rayado (El diamante es inteligentemente duro, el yeso es blando).<br>• <strong>Tenacidad:</strong> Resistencia a romperse cuando se le da un golpe (El acero es tenaz, el vidrio es frágil).<br>• <strong>Elasticidad:</strong> Capacidad de recuperar la forma tras estirarlo (La goma de un tirachinas).')">Propiedades Mecánicas</button>
+            <button class="propiedad-btn" onclick="showProp('termicas', '🔥 PROPIEDADES TÉRMICAS', 'Definen cómo se comporta el material con el calor.<br><br>• <strong>Conductores térmicos:</strong> Dejan pasar el calor rápido (Los metales, por eso las sartenes son de aluminio).<br>• <strong>Aislantes térmicos:</strong> Bloquean el calor (La madera o el plástico, por eso los mangos de las sartenes son de plástico para no quemarte).')">Propiedades Térmicas</button>
+            <button class="propiedad-btn" onclick="showProp('ecologicas', '🌍 PROPIEDADES ECOLÓGICAS', 'El impacto que tienen en el medio ambiente.<br><br>• <strong>Reciclable:</strong> Se puede reutilizar para hacer otro objeto (El vidrio o el papel).<br>• <strong>Biodegradable:</strong> La naturaleza lo descompone de forma natural sin contaminar (La madera o el algodón).')">Propiedades Ecológicas</button>
+        </div>
 
-## 🎮 ¿Qué incluye?
+        <div id="display-propiedad" class="info-propiedad" style="display:none;">
+            <h3 id="prop-titulo"></h3>
+            <p id="prop-cuerpo"></p>
+        </div>
 
-El juego está organizado en cuatro fases que combinan teoría y práctica:
+        <!-- PEQUEÑO QUIZ DE REPASO -->
+        <div class="quiz-box">
+            <h3>⚡ Pregunta Flash de clase</h3>
+            <p>¿Por qué las líneas de alta tensión usan cables de cobre o aluminio en lugar de hilos de plástico?</p>
+            <button onclick="checkQuiz(false)" style="padding: 8px; margin-right: 10px; cursor:pointer;">Porque el plástico pesa más</button>
+            <button onclick="checkQuiz(true)" style="padding: 8px; cursor:pointer;">Porque los metales tienen una excelente conductividad eléctrica</button>
+            <div id="quiz-res"></div>
+        </div>
+    </div>
+</div>
 
-1. **El Naufragio** — Reto de supervivencia en el que los grupos deben elegir 3 materiales para construir un refugio y una balsa, valorando sus propiedades.
-2. **Teoría** — Clasificación de los materiales según su origen (naturales, artificiales y sintéticos) y estudio de sus propiedades mecánicas, térmicas, eléctricas, ecológicas y estéticas.
-3. **Empareja** — Juego para asociar cada material con su propiedad principal.
-4. **Quiz Final** — Cuestionario de 6 preguntas con explicaciones y descarga de un informe imprimible para entregar al profesor.
+<script>
+    // Sistema de Pestañas
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        
+        document.getElementById(tabId).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
 
-## 👥 Trabajo en grupo
+    // Lógica del Juego
+    let seleccionados = [];
+    const descripciones = {
+        madera: '🪵 Madera: Flota y sirve para estructuras.',
+        metal: '🔩 Metal: Pesa mucho pero es ultra resistente.',
+        plastico: '🥤 Plástico: Impermeable y ligero.',
+        ceramica: '🧱 Cerámica: Muy frágil, mala idea para la balsa.',
+        textil: '⛺ Textil: Perfecto para lonas o velas de barco.'
+    };
 
-Antes de empezar, cada grupo registra su nombre, miembros y clase. Al terminar, pueden descargar un informe en HTML con sus resultados para entregárselo al profesor.
+    function toggleMaterial(id, info) {
+        const card = document.getElementById('mat-' + id);
+        const index = seleccionados.indexOf(id);
 
-## 📲 Cómo usarlo en clase
+        if (index > -1) {
+            seleccionados.splice(index, 1);
+            card.classList.remove('selected');
+        } else {
+            if (seleccionados.length >= 3) {
+                alert("¡Mochila llena! Deselecciona un material primero.");
+                return;
+            }
+            seleccionados.push(id);
+            card.classList.add('selected');
+        }
+        actualizarMochila();
+    }
 
-1. Comparte con los alumnos el enlace o un código QR.
-2. Cada grupo entra desde un dispositivo y registra su equipo.
-3. Recorren las cuatro fases.
-4. Al acabar, pulsan "Descargar informe" y suben el archivo al Aula Virtual o lo envían por correo.
+    function actualizarMochila() {
+        const box = document.getElementById('mochila-status');
+        if (seleccionados.length === 0) {
+            box.innerHTML = `<h3>🎒 Vuestra mochila actual:</h3><p>Selecciona 3 materiales arriba para ver vuestras probabilidades...</p>`;
+            return;
+        }
 
-## 🛠️ Tecnología
+        let listaTxt = "<ul>";
+        seleccionados.forEach(id => {
+            listaTxt += `<li>${descripciones[id]}</li>`;
+        });
+        listaTxt += "</ul>";
 
-Página web estática en HTML, CSS y JavaScript, sin dependencias externas. Funciona sin conexión una vez cargada.
+        let diagnostico = "";
+        if (seleccionados.length === 3) {
+            if (seleccionados.includes('madera') && seleccionados.includes('plastico') && seleccionados.includes('textil')) {
+                diagnostico = "<p class='alert-success'>🟢 ¡ÉXITO TOTAL! Tenéis madera para flotar, plástico para impermeabilizar y textil para la vela. ¡Escaparéis sanos y salvos!</p>";
+            } else if (seleccionados.includes('metal') && seleccionados.includes('ceramica')) {
+                diagnostico = "<p class='alert-danger'>🔴 ¡PELIGRO! El metal hundirá vuestra balsa y la cerámica se romperá en el viaje. Tenéis que repensar las propiedades mecánicas de vuestra mochila.</p>";
+            } else {
+                diagnostico = "<p style='color: #d97706; font-weight:bold;'>🟡 SUPERVIVENCIA REGULAR: Conseguiréis hacer un refugio aceptable, pero construir la balsa os va a costar muchísimo con esa combinación. ¡Justificad vuestra estrategia!</p>";
+            }
+        } else {
+            diagnostico = `<p>Lleváis ${seleccionados.length}/3 materiales elegidos. Sigue seleccionando.</p>`;
+        }
 
----
+        box.innerHTML = `<h3>🎒 Vuestra mochila actual:</h3>${listaTxt}${diagnostico}`;
+    }
 
-📚 Material elaborado para la asignatura de **Tecnología · 1º ESO**.
+    // Lógica de teoría
+    function showProp(id, titulo, cuerpo) {
+        const display = document.getElementById('display-propiedad');
+        document.getElementById('prop-titulo').innerText = titulo;
+        document.getElementById('prop-cuerpo').innerHTML = cuerpo;
+        display.style.display = 'block';
+    }
+
+    // Quiz
+    function checkQuiz(isCorrect) {
+        const res = document.getElementById('quiz-res');
+        if(isCorrect) {
+            res.innerHTML = "<p class='alert-success'>¡Exacto! El cobre y el aluminio permiten que la electricidad viaje sin resistencia, mientras que el plástico es un aislante.</p>";
+        } else {
+            res.innerHTML = "<p class='alert-danger'>¡Oh, no es correcto! El plástico es más ligero, pero recuerda que necesitamos transportar energía, por lo que buscamos conductividad.</p>";
+        }
+    }
+</script>
+
+</body>
+</html>
