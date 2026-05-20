@@ -1,263 +1,1355 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1º ESO: Materiales Técnicos e Interactivos</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f4f8;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-        }
-        h1 {
-            color: #1e3a8a;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .tabs {
-            display: flex;
-            border-bottom: 2px solid #e2e8f0;
-            margin-bottom: 25px;
-        }
-        .tab-btn {
-            flex: 1;
-            padding: 15px;
-            background: #f8fafc;
-            border: none;
-            border-bottom: 3px solid transparent;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            color: #64748b;
-            transition: all 0.3s;
-        }
-        .tab-btn.active {
-            color: #2563eb;
-            border-bottom-color: #2563eb;
-            background: #eff6ff;
-        }
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        /* Estilos Fase 1 */
-        .grid-materiales {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-        .mat-card {
-            background: #f1f5f9;
-            border: 2px solid #cbd5e1;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            font-weight: bold;
-            transition: transform 0.2s, background 0.2s;
-        }
-        .mat-card:hover {
-            transform: scale(1.05);
-        }
-        .mat-card.selected {
-            background: #bbf7d0;
-            border-color: #22c55e;
-            color: #15803d;
-        }
-        .veredicto-box {
-            margin-top: 25px;
-            padding: 20px;
-            background: #f8fafc;
-            border-left: 5px solid #2563eb;
-            border-radius: 4px;
-        }
-        /* Estilos Fase 2 */
-        .propiedad-btn {
-            background: #2563eb;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            margin: 5px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .propiedad-btn:hover {
-            background: #1d4ed8;
-        }
-        .info-propiedad {
-            margin-top: 20px;
-            padding: 20px;
-            background: #f0fdf4;
-            border-radius: 8px;
-            border: 1px solid #bbf7d0;
-        }
-        .quiz-box {
-            margin-top: 30px;
-            background: #fff7ed;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #ffedd5;
-        }
-        .alert-success { color: #16a34a; font-weight: bold; margin-top: 10px; }
-        .alert-danger { color: #dc2626; font-weight: bold; margin-top: 10px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tecnología 1º ESO · Los Materiales Técnicos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800;9..144,900&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fdfaf3;
+    --paper:#fffdf6;
+    --ink:#1a1a1a;
+    --muted:#6b6b6b;
+    --line:#1a1a1a;
+    --primary:#e63946;     /* rojo industrial */
+    --secondary:#1d3557;   /* azul prusia */
+    --accent:#ffb703;      /* amarillo señalización */
+    --green:#2a9d8f;
+    --danger:#d62828;
+    --soft:#f1ede2;
+    --shadow:6px 6px 0 var(--ink);
+    --shadow-sm:3px 3px 0 var(--ink);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;line-height:1.5}
+  body{
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(26,26,26,.08) 1px, transparent 0);
+    background-size:22px 22px;
+    padding:24px 16px 80px;
+  }
+
+  /* ---------- Tipografía y utilidades ---------- */
+  h1,h2,h3,h4{font-family:'Fraunces',serif;letter-spacing:-.02em;line-height:1.05}
+  h1{font-weight:900;font-size:clamp(2rem, 5vw, 3.2rem)}
+  h2{font-weight:800;font-size:1.8rem;margin-bottom:.4em}
+  h3{font-weight:700;font-size:1.25rem;margin-bottom:.4em}
+  .mono{font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase}
+  .container{max-width:1100px;margin:0 auto}
+
+  /* ---------- Cabecera ---------- */
+  header{
+    background:var(--secondary);
+    color:var(--paper);
+    border:3px solid var(--ink);
+    box-shadow:var(--shadow);
+    padding:28px 32px;
+    border-radius:4px;
+    position:relative;
+    overflow:hidden;
+  }
+  header::before{
+    content:"";position:absolute;right:-40px;top:-40px;
+    width:180px;height:180px;border-radius:50%;
+    background:var(--accent);opacity:.9;
+    border:3px solid var(--ink);
+  }
+  header::after{
+    content:"";position:absolute;right:30px;top:30px;
+    width:60px;height:60px;
+    background:var(--primary);
+    border:3px solid var(--ink);
+    transform:rotate(15deg);
+  }
+  .header-tag{
+    display:inline-block;background:var(--accent);color:var(--ink);
+    padding:4px 12px;border:2px solid var(--ink);
+    font-family:'JetBrains Mono',monospace;font-size:.75rem;
+    font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+    margin-bottom:14px;position:relative;z-index:2;
+  }
+  header h1{position:relative;z-index:2;max-width:720px}
+  header p{position:relative;z-index:2;margin-top:10px;max-width:600px;opacity:.9;font-size:1rem}
+
+  /* ---------- Tarjeta de equipo ---------- */
+  .team-card{
+    background:var(--accent);
+    border:3px solid var(--ink);
+    box-shadow:var(--shadow);
+    padding:24px;
+    margin-top:24px;
+    border-radius:4px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    align-items:end;
+  }
+  .team-card .mono{margin-bottom:6px;display:block}
+  .team-card label{display:block;margin-bottom:6px;font-weight:700;font-size:.95rem}
+  .team-card input{
+    width:100%;padding:12px 14px;font-size:1rem;
+    border:2px solid var(--ink);background:var(--paper);
+    font-family:'DM Sans',sans-serif;font-weight:500;
+  }
+  .team-card input:focus{outline:none;box-shadow:var(--shadow-sm)}
+  .team-saved{
+    grid-column:1/-1;
+    display:flex;justify-content:space-between;align-items:center;
+    padding-top:14px;border-top:2px dashed var(--ink);
+  }
+  .team-saved-info{font-weight:700}
+  .team-saved-info span{color:var(--secondary)}
+
+  /* ---------- Botones ---------- */
+  .btn{
+    background:var(--ink);color:var(--paper);
+    border:2px solid var(--ink);
+    padding:11px 20px;font-weight:700;font-size:.95rem;
+    cursor:pointer;font-family:'DM Sans',sans-serif;
+    box-shadow:var(--shadow-sm);
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink)}
+  .btn:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--ink)}
+  .btn.primary{background:var(--primary);color:var(--paper)}
+  .btn.success{background:var(--green);color:var(--paper)}
+  .btn.warn{background:var(--accent);color:var(--ink)}
+  .btn.ghost{background:var(--paper);color:var(--ink)}
+
+  /* ---------- Tabs ---------- */
+  .tabs{
+    display:flex;gap:0;margin-top:32px;
+    border-bottom:3px solid var(--ink);
+  }
+  .tab-btn{
+    flex:1;padding:14px 16px;
+    background:var(--soft);color:var(--ink);
+    border:3px solid var(--ink);
+    border-bottom:none;
+    font-family:'Fraunces',serif;font-weight:700;font-size:1.05rem;
+    cursor:pointer;
+    margin-right:-3px;
+    position:relative;
+    transition:background .15s;
+  }
+  .tab-btn:last-child{margin-right:0}
+  .tab-btn:hover{background:var(--paper)}
+  .tab-btn.active{
+    background:var(--primary);color:var(--paper);
+    transform:translateY(3px);
+    z-index:2;
+  }
+  .tab-btn .tab-num{
+    font-family:'JetBrains Mono',monospace;
+    font-size:.7rem;display:block;opacity:.7;
+  }
+  .tab-content{display:none;animation:fadeIn .35s ease}
+  .tab-content.active{display:block}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  /* ---------- Paneles ---------- */
+  .panel{
+    background:var(--paper);
+    border:3px solid var(--ink);
+    box-shadow:var(--shadow);
+    padding:28px;
+    margin-top:28px;
+    border-radius:4px;
+  }
+  .panel-intro{
+    background:var(--soft);
+    padding:18px 22px;
+    border-left:5px solid var(--primary);
+    margin-bottom:24px;
+    border-radius:2px;
+  }
+  .panel-intro p{font-size:1rem}
+  .panel-intro strong{background:var(--accent);padding:1px 5px;border:1.5px solid var(--ink)}
+
+  /* ---------- FASE 1 : juego del náufrago ---------- */
+  .scenario{
+    background:linear-gradient(135deg, #1d3557 0%, #2a9d8f 100%);
+    color:var(--paper);
+    padding:24px;
+    border:3px solid var(--ink);
+    box-shadow:var(--shadow);
+    border-radius:4px;
+    margin-bottom:24px;
+    position:relative;
+    overflow:hidden;
+  }
+  .scenario::before{
+    content:"🏝️";position:absolute;right:18px;top:8px;
+    font-size:5rem;opacity:.18;
+  }
+  .scenario h2{color:var(--accent)}
+  .scenario .mission{
+    display:flex;gap:14px;margin-top:14px;flex-wrap:wrap;
+  }
+  .mission-tag{
+    background:var(--paper);color:var(--ink);
+    padding:6px 14px;border:2px solid var(--ink);
+    font-weight:700;font-size:.9rem;
+    box-shadow:var(--shadow-sm);
+  }
+
+  .grid-materiales{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(160px, 1fr));
+    gap:18px;
+    margin-top:8px;
+  }
+  .mat-card{
+    background:var(--paper);
+    border:3px solid var(--ink);
+    border-radius:4px;
+    padding:14px 12px 16px;
+    text-align:center;
+    cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+    position:relative;
+    box-shadow:var(--shadow-sm);
+  }
+  .mat-card:hover{
+    transform:translate(-2px,-2px);
+    box-shadow:5px 5px 0 var(--ink);
+  }
+  .mat-card.selected{
+    background:var(--green);color:var(--paper);
+    transform:translate(-2px,-2px);
+    box-shadow:5px 5px 0 var(--ink);
+  }
+  .mat-card.selected .mat-icon{filter:brightness(0) invert(1)}
+  .mat-card.selected .mat-mini{color:var(--paper);opacity:.85}
+  .mat-icon{
+    width:72px;height:72px;margin:0 auto 8px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .mat-icon svg{width:100%;height:100%}
+  .mat-name{font-family:'Fraunces',serif;font-weight:800;font-size:1.05rem;line-height:1.1}
+  .mat-mini{font-size:.75rem;color:var(--muted);margin-top:4px;line-height:1.2}
+  .mat-card .checkmark{
+    position:absolute;top:6px;right:6px;
+    width:24px;height:24px;border-radius:50%;
+    background:var(--paper);color:var(--green);
+    border:2px solid var(--ink);
+    display:none;align-items:center;justify-content:center;
+    font-weight:900;font-size:.9rem;
+  }
+  .mat-card.selected .checkmark{display:flex}
+
+  .mochila-status{
+    margin-top:28px;
+    background:var(--soft);
+    border:3px dashed var(--ink);
+    padding:22px;
+    border-radius:4px;
+  }
+  .mochila-status h3{
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:12px;
+  }
+  .mochila-counter{
+    background:var(--ink);color:var(--paper);
+    padding:3px 10px;border-radius:99px;
+    font-family:'JetBrains Mono',monospace;font-size:.85rem;
+  }
+  .mochila-list{list-style:none;padding:0;margin:8px 0}
+  .mochila-list li{
+    padding:10px 14px;background:var(--paper);
+    border:2px solid var(--ink);margin-bottom:8px;
+    border-radius:3px;font-size:.95rem;
+    display:flex;align-items:center;gap:10px;
+  }
+  .verdict{
+    margin-top:14px;padding:16px 18px;border:3px solid var(--ink);
+    border-radius:3px;font-weight:600;
+  }
+  .verdict.ok{background:#c7f9cc;border-color:var(--green)}
+  .verdict.bad{background:#ffccd5;border-color:var(--danger)}
+  .verdict.mid{background:#ffe8a3}
+  .verdict-title{
+    font-family:'Fraunces',serif;font-weight:800;font-size:1.2rem;
+    margin-bottom:6px;display:flex;align-items:center;gap:8px;
+  }
+  .score-bar{
+    margin-top:10px;background:var(--paper);
+    border:2px solid var(--ink);height:22px;
+    position:relative;overflow:hidden;
+  }
+  .score-fill{
+    height:100%;background:var(--green);width:0;
+    transition:width .6s cubic-bezier(.4,1.4,.5,1);
+    display:flex;align-items:center;justify-content:flex-end;
+    padding-right:8px;color:var(--paper);font-weight:700;font-size:.8rem;
+  }
+
+  /* ---------- FASE 2 : teoría ---------- */
+  .clasificacion{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    gap:18px;
+    margin-top:18px;
+  }
+  .clas-card{
+    border:3px solid var(--ink);
+    padding:18px;border-radius:4px;
+    box-shadow:var(--shadow-sm);
+    transition:transform .15s;
+  }
+  .clas-card:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink)}
+  .clas-card.naturales{background:#c7f9cc}
+  .clas-card.artificiales{background:#a2d2ff}
+  .clas-card.sinteticos{background:#ffd6a5}
+  .clas-card h4{
+    font-family:'Fraunces',serif;font-size:1.2rem;
+    margin-bottom:8px;
+  }
+  .clas-card .clas-icon{font-size:2rem;margin-bottom:6px;display:block}
+  .clas-card ul{list-style:none;margin-top:8px;padding:0}
+  .clas-card ul li{
+    font-size:.85rem;padding:3px 0;
+    border-bottom:1px dashed var(--ink);
+  }
+  .clas-card ul li:last-child{border:none}
+
+  .propiedades-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(180px,1fr));
+    gap:14px;margin-top:18px;
+  }
+  .prop-btn{
+    background:var(--paper);
+    border:3px solid var(--ink);
+    padding:16px 14px;
+    text-align:left;cursor:pointer;
+    box-shadow:var(--shadow-sm);
+    font-family:'DM Sans',sans-serif;
+    transition:all .15s;
+  }
+  .prop-btn:hover,.prop-btn.active{
+    transform:translate(-2px,-2px);
+    box-shadow:5px 5px 0 var(--ink);
+    background:var(--accent);
+  }
+  .prop-btn .prop-emoji{font-size:1.6rem;display:block;margin-bottom:6px}
+  .prop-btn .prop-titulo{font-family:'Fraunces',serif;font-weight:800;font-size:1.05rem}
+  .prop-btn .prop-sub{font-size:.78rem;color:var(--muted);margin-top:2px}
+
+  .info-propiedad{
+    margin-top:22px;padding:22px;
+    background:var(--soft);
+    border:3px solid var(--ink);
+    border-radius:4px;
+    display:none;
+  }
+  .info-propiedad h3{
+    font-size:1.4rem;
+    background:var(--ink);color:var(--paper);
+    display:inline-block;padding:6px 14px;margin-bottom:14px;
+  }
+  .info-propiedad .prop-list{list-style:none;padding:0}
+  .info-propiedad .prop-list li{
+    padding:10px 14px;background:var(--paper);
+    border:2px solid var(--ink);margin-bottom:8px;
+    border-radius:3px;
+  }
+  .info-propiedad .prop-list li strong{color:var(--primary)}
+
+  /* ---------- FASE 3 : empareja ---------- */
+  .match-area{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;margin-top:18px;
+  }
+  .match-col h4{margin-bottom:10px}
+  .match-item{
+    background:var(--paper);
+    border:3px solid var(--ink);
+    padding:12px 14px;margin-bottom:10px;
+    cursor:pointer;font-weight:600;
+    box-shadow:var(--shadow-sm);
+    transition:all .12s;
+  }
+  .match-item:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink)}
+  .match-item.picked{background:var(--accent)}
+  .match-item.matched{
+    background:var(--green);color:var(--paper);
+    cursor:default;opacity:.8;
+    transform:none;box-shadow:var(--shadow-sm);
+  }
+  .match-item.wrong{
+    background:#ffccd5;animation:shake .4s;
+  }
+  @keyframes shake{
+    0%,100%{transform:translateX(0)}
+    25%{transform:translateX(-6px)}
+    75%{transform:translateX(6px)}
+  }
+  .match-feedback{
+    margin-top:14px;padding:12px 16px;
+    background:var(--paper);border:2px solid var(--ink);
+    font-weight:600;display:none;
+  }
+
+  /* ---------- FASE 4 : quiz ---------- */
+  .quiz-progress{
+    display:flex;gap:6px;margin-bottom:18px;
+  }
+  .quiz-dot{
+    flex:1;height:8px;background:var(--soft);
+    border:2px solid var(--ink);
+  }
+  .quiz-dot.done{background:var(--green)}
+  .quiz-dot.current{background:var(--accent)}
+
+  .quiz-question{
+    background:var(--soft);
+    border:3px solid var(--ink);
+    padding:20px;border-radius:4px;
+  }
+  .quiz-question .q-num{
+    font-family:'JetBrains Mono',monospace;font-size:.75rem;
+    background:var(--ink);color:var(--paper);
+    padding:3px 10px;display:inline-block;margin-bottom:10px;
+  }
+  .quiz-question h3{font-size:1.2rem;margin-bottom:14px}
+  .quiz-options{display:grid;gap:10px}
+  .quiz-opt{
+    background:var(--paper);
+    border:3px solid var(--ink);
+    padding:14px 16px;
+    text-align:left;cursor:pointer;
+    font-family:'DM Sans',sans-serif;font-size:.98rem;
+    box-shadow:var(--shadow-sm);
+    transition:all .12s;
+  }
+  .quiz-opt:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink);background:var(--accent)}
+  .quiz-opt.correct{background:var(--green);color:var(--paper);pointer-events:none}
+  .quiz-opt.wrong{background:#ffccd5;pointer-events:none}
+  .quiz-feedback{
+    margin-top:14px;padding:14px;
+    background:var(--paper);border:2px solid var(--ink);
+    display:none;font-size:.95rem;
+  }
+  .quiz-feedback.ok{background:#c7f9cc;display:block}
+  .quiz-feedback.no{background:#ffccd5;display:block}
+
+  /* ---------- Resultados finales ---------- */
+  .resultado-final{
+    margin-top:34px;
+    background:var(--secondary);color:var(--paper);
+    border:3px solid var(--ink);box-shadow:var(--shadow);
+    padding:28px;border-radius:4px;
+    display:none;
+  }
+  .resultado-final h2{color:var(--accent)}
+  .resultado-stats{
+    display:grid;grid-template-columns:repeat(auto-fit, minmax(140px,1fr));
+    gap:14px;margin-top:18px;
+  }
+  .stat{
+    background:var(--paper);color:var(--ink);
+    border:2px solid var(--ink);
+    padding:14px;text-align:center;
+  }
+  .stat-num{font-family:'Fraunces',serif;font-weight:900;font-size:2rem;color:var(--primary)}
+  .stat-label{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em}
+
+  /* ---------- Footer ---------- */
+  footer{
+    margin-top:50px;text-align:center;
+    color:var(--muted);font-size:.85rem;
+    padding:20px;
+  }
+  footer .mono{display:block;margin-top:6px}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:680px){
+    .team-card{grid-template-columns:1fr}
+    .match-area{grid-template-columns:1fr}
+    .tab-btn{font-size:.9rem;padding:12px 8px}
+    .tab-btn .tab-num{font-size:.6rem}
+    header{padding:22px}
+    .panel{padding:18px}
+    header::before{width:120px;height:120px}
+    header::after{width:40px;height:40px;right:20px;top:20px}
+  }
+</style>
 </head>
 <body>
 
 <div class="container">
-    <h1>🔬 Tecnología 1º ESO: Los Materiales Técnicos</h1>
-    
-    <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab('fase1')">Fase 1: El Juego del Náufrago</button>
-        <button class="tab-btn" onclick="switchTab('fase2')">Fase 2: Teoría y Propiedades</button>
+
+  <!-- ====== CABECERA ====== -->
+  <header>
+    <span class="header-tag">Tecnología · 1º ESO · Unidad 3</span>
+    <h1>Los Materiales Técnicos</h1>
+    <p>Aprende, juega y demuestra lo que sabes sobre los materiales que dan forma al mundo que te rodea.</p>
+  </header>
+
+  <!-- ====== TARJETA DE EQUIPO ====== -->
+  <div class="team-card">
+    <div>
+      <span class="mono">▸ Identifícate</span>
+      <label for="grupoNombre">Nombre del grupo</label>
+      <input type="text" id="grupoNombre" placeholder="Ej: Los Ingenieros 1B">
+    </div>
+    <div>
+      <label for="grupoMiembros">Miembros del grupo</label>
+      <input type="text" id="grupoMiembros" placeholder="Ej: Lucía, Marco, Sofía, Pablo">
+    </div>
+    <div>
+      <label for="grupoClase">Clase</label>
+      <input type="text" id="grupoClase" placeholder="Ej: 1º ESO B">
+    </div>
+    <div>
+      <label for="grupoFecha">Fecha</label>
+      <input type="date" id="grupoFecha">
+    </div>
+    <div class="team-saved">
+      <div class="team-saved-info">
+        <span class="mono">Equipo:</span> <span id="grupoLabel">— sin registrar —</span>
+      </div>
+      <button class="btn primary" onclick="guardarEquipo()">Registrar equipo ▸</button>
+    </div>
+  </div>
+
+  <!-- ====== TABS ====== -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab(event,'fase1')">
+      <span class="tab-num">01</span>El Naufragio
+    </button>
+    <button class="tab-btn" onclick="switchTab(event,'fase2')">
+      <span class="tab-num">02</span>Teoría
+    </button>
+    <button class="tab-btn" onclick="switchTab(event,'fase3')">
+      <span class="tab-num">03</span>Empareja
+    </button>
+    <button class="tab-btn" onclick="switchTab(event,'fase4')">
+      <span class="tab-num">04</span>Quiz Final
+    </button>
+  </div>
+
+  <!-- ====== FASE 1 : NÁUFRAGO ====== -->
+  <div id="fase1" class="tab-content active">
+
+    <div class="scenario">
+      <h2>¡Vuestro avión ha caído en una isla desierta!</h2>
+      <p>Vuestro equipo necesita construir <strong>un refugio impermeable</strong> y <strong>una balsa flotante</strong> para sobrevivir y escapar. En la mochila del avión solo entran <strong>3 materiales</strong>. ¡Tendréis que elegirlos pensando en sus propiedades!</p>
+      <div class="mission">
+        <div class="mission-tag">🛖 Misión 1: Refugio</div>
+        <div class="mission-tag">🛟 Misión 2: Balsa</div>
+        <div class="mission-tag">🎯 Objetivo: 3 materiales</div>
+      </div>
     </div>
 
-    <!-- FASE 1 -->
-    <div id="fase1" class="tab-content active">
-        <h2>🏝️ ¡Habéis naufragado en una isla desierta!</h2>
-        <p>Para sobrevivir y poder escapar, vuestro grupo necesita construir un refugio impermeable y una balsa flotante. Solo tenéis espacio en la mochila para <strong>3 materiales</strong>. ¡Elegid sabiamente!</p>
-        
-        <div class="grid-materiales">
-            <div class="mat-card" id="mat-madera" onclick="toggleMaterial('madera', 'Madera: Es ligera, flota genial y resiste bien la flexión, pero si es fina puede romperse o pudrirse con los meses.')">Madera</div>
-            <div class="mat-card" id="mat-metal" onclick="toggleMaterial('metal', 'Metal (Acero): Es extremadamente tenaz (soporta golpes) y duro, pero pesa muchísimo para la balsa y se oxida con el agua del mar.')">Metal</div>
-            <div class="mat-card" id="mat-plastico" onclick="toggleMaterial('plastico', 'Plástico: Es 100% impermeable y muy ligero (no se hunde), pero es difícil de unir de forma resistente sin herramientas.')">Plástico</div>
-            <div class="mat-card" id="mat-ceramica" onclick="toggleMaterial('ceramica', 'Cerámica (Tejas): Soporta muy bien el calor del sol, pero es muy frágil. Al primer golpe o caída se romperá en mil pedazos.')">Cerámica</div>
-            <div class="mat-card" id="mat-textil" onclick="toggleMaterial('textil', 'Tejido/Lona: Es muy flexible y ligero, ideal para hacer la vela de la balsa o el techo del refugio si se combina con ramas.')">Textil/Tela</div>
-        </div>
+    <div class="panel">
+      <h3>Elige tus materiales (3 máximo)</h3>
+      <p style="color:var(--muted);margin-bottom:18px">Toca cada material para añadirlo o quitarlo de la mochila.</p>
 
-        <div class="veredicto-box" id="mochila-status">
-            <h3>🎒 Vuestra mochila actual:</h3>
-            <p>Selecciona 3 materiales arriba para ver vuestras probabilidades de supervivencia...</p>
-        </div>
+      <div class="grid-materiales" id="gridMateriales">
+        <!-- Tarjetas inyectadas por JS -->
+      </div>
+
+      <div class="mochila-status" id="mochilaStatus">
+        <h3>
+          <span>🎒 Mochila del equipo</span>
+          <span class="mochila-counter" id="mochilaCounter">0/3</span>
+        </h3>
+        <p style="color:var(--muted)">Selecciona 3 materiales para ver vuestras posibilidades de supervivencia…</p>
+      </div>
     </div>
+  </div>
 
-    <!-- FASE 2 -->
-    <div id="fase2" class="tab-content">
-        <h2>📚 La Teoría: ¿Qué son los Materiales Técnicos?</h2>
-        <p>Un <strong>material técnico</strong> es la materia prima que los humanos transformamos para poder fabricar objetos (un árbol se transforma en tablones de madera para hacer mesas).</p>
-        <p>Cada material se comporta de forma diferente según sus <strong>propiedades</strong>. Haz clic en cada grupo para descubrir ejemplos cotidianos:</p>
-        
-        <div>
-            <button class="propiedad-btn" onclick="showProp('mecanicas', '🔩 PROPIEDADES MECÁNICAS', 'Tienen que ver con cómo reacciona el material cuando le aplicamos fuerzas.<br><br>• <strong>Dureza:</strong> Resistencia a ser rayado (El diamante es inteligentemente duro, el yeso es blando).<br>• <strong>Tenacidad:</strong> Resistencia a romperse cuando se le da un golpe (El acero es tenaz, el vidrio es frágil).<br>• <strong>Elasticidad:</strong> Capacidad de recuperar la forma tras estirarlo (La goma de un tirachinas).')">Propiedades Mecánicas</button>
-            <button class="propiedad-btn" onclick="showProp('termicas', '🔥 PROPIEDADES TÉRMICAS', 'Definen cómo se comporta el material con el calor.<br><br>• <strong>Conductores térmicos:</strong> Dejan pasar el calor rápido (Los metales, por eso las sartenes son de aluminio).<br>• <strong>Aislantes térmicos:</strong> Bloquean el calor (La madera o el plástico, por eso los mangos de las sartenes son de plástico para no quemarte).')">Propiedades Térmicas</button>
-            <button class="propiedad-btn" onclick="showProp('ecologicas', '🌍 PROPIEDADES ECOLÓGICAS', 'El impacto que tienen en el medio ambiente.<br><br>• <strong>Reciclable:</strong> Se puede reutilizar para hacer otro objeto (El vidrio o el papel).<br>• <strong>Biodegradable:</strong> La naturaleza lo descompone de forma natural sin contaminar (La madera o el algodón).')">Propiedades Ecológicas</button>
-        </div>
+  <!-- ====== FASE 2 : TEORÍA ====== -->
+  <div id="fase2" class="tab-content">
 
-        <div id="display-propiedad" class="info-propiedad" style="display:none;">
-            <h3 id="prop-titulo"></h3>
-            <p id="prop-cuerpo"></p>
-        </div>
+    <div class="panel">
+      <div class="panel-intro">
+        <p>Un <strong>material técnico</strong> es la materia prima que las personas transformamos para fabricar objetos. Un tronco se convierte en tablones; el petróleo en plástico; la arena en vidrio. Cada material se elige según sus <strong>propiedades</strong>.</p>
+      </div>
 
-        <!-- PEQUEÑO QUIZ DE REPASO -->
-        <div class="quiz-box">
-            <h3>⚡ Pregunta Flash de clase</h3>
-            <p>¿Por qué las líneas de alta tensión usan cables de cobre o aluminio en lugar de hilos de plástico?</p>
-            <button onclick="checkQuiz(false)" style="padding: 8px; margin-right: 10px; cursor:pointer;">Porque el plástico pesa más</button>
-            <button onclick="checkQuiz(true)" style="padding: 8px; cursor:pointer;">Porque los metales tienen una excelente conductividad eléctrica</button>
-            <div id="quiz-res"></div>
+      <h3>1 · Clasificación por su origen</h3>
+      <div class="clasificacion">
+        <div class="clas-card naturales">
+          <span class="clas-icon">🌳</span>
+          <h4>Naturales</h4>
+          <p style="font-size:.9rem">Se encuentran tal cual en la naturaleza, sin transformarlos.</p>
+          <ul>
+            <li>Madera</li>
+            <li>Piedra · Mármol</li>
+            <li>Algodón · Lana</li>
+            <li>Arcilla</li>
+          </ul>
         </div>
+        <div class="clas-card artificiales">
+          <span class="clas-icon">🏭</span>
+          <h4>Artificiales</h4>
+          <p style="font-size:.9rem">Se obtienen transformando un material natural.</p>
+          <ul>
+            <li>Acero (del hierro)</li>
+            <li>Papel (de la madera)</li>
+            <li>Vidrio (de la arena)</li>
+            <li>Cerámica (de la arcilla)</li>
+          </ul>
+        </div>
+        <div class="clas-card sinteticos">
+          <span class="clas-icon">⚗️</span>
+          <h4>Sintéticos</h4>
+          <p style="font-size:.9rem">Se crean en laboratorio mediante procesos químicos.</p>
+          <ul>
+            <li>Plásticos (PVC, PET)</li>
+            <li>Nailon · Poliéster</li>
+            <li>Caucho sintético</li>
+            <li>Fibra de carbono</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 style="margin-top:32px">2 · Propiedades de los materiales</h3>
+      <p style="color:var(--muted);margin-bottom:8px">Pulsa cada categoría para descubrirla:</p>
+
+      <div class="propiedades-grid">
+        <button class="prop-btn" onclick="showProp(this,'mecanicas')">
+          <span class="prop-emoji">🔩</span>
+          <span class="prop-titulo">Mecánicas</span>
+          <span class="prop-sub">Reacción ante fuerzas</span>
+        </button>
+        <button class="prop-btn" onclick="showProp(this,'termicas')">
+          <span class="prop-emoji">🔥</span>
+          <span class="prop-titulo">Térmicas</span>
+          <span class="prop-sub">Comportamiento con el calor</span>
+        </button>
+        <button class="prop-btn" onclick="showProp(this,'electricas')">
+          <span class="prop-emoji">⚡</span>
+          <span class="prop-titulo">Eléctricas</span>
+          <span class="prop-sub">Paso de la electricidad</span>
+        </button>
+        <button class="prop-btn" onclick="showProp(this,'ecologicas')">
+          <span class="prop-emoji">🌍</span>
+          <span class="prop-titulo">Ecológicas</span>
+          <span class="prop-sub">Impacto ambiental</span>
+        </button>
+        <button class="prop-btn" onclick="showProp(this,'esteticas')">
+          <span class="prop-emoji">🎨</span>
+          <span class="prop-titulo">Estéticas</span>
+          <span class="prop-sub">Color, brillo, textura</span>
+        </button>
+      </div>
+
+      <div class="info-propiedad" id="infoProp">
+        <h3 id="propTitulo"></h3>
+        <ul class="prop-list" id="propLista"></ul>
+      </div>
+
+      <h3 style="margin-top:32px">3 · Tabla rápida de materiales</h3>
+      <div style="overflow-x:auto;margin-top:8px">
+        <table style="width:100%;border-collapse:collapse;font-size:.9rem">
+          <thead>
+            <tr style="background:var(--ink);color:var(--paper)">
+              <th style="padding:10px;text-align:left;border:2px solid var(--ink)">Material</th>
+              <th style="padding:10px;text-align:left;border:2px solid var(--ink)">Origen</th>
+              <th style="padding:10px;text-align:left;border:2px solid var(--ink)">Propiedad clave</th>
+              <th style="padding:10px;text-align:left;border:2px solid var(--ink)">Uso típico</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="padding:8px;border:2px solid var(--ink)">Madera</td><td style="padding:8px;border:2px solid var(--ink)">Natural</td><td style="padding:8px;border:2px solid var(--ink)">Ligera, aislante</td><td style="padding:8px;border:2px solid var(--ink)">Muebles, vigas</td></tr>
+            <tr style="background:var(--soft)"><td style="padding:8px;border:2px solid var(--ink)">Acero</td><td style="padding:8px;border:2px solid var(--ink)">Artificial</td><td style="padding:8px;border:2px solid var(--ink)">Tenaz, duro</td><td style="padding:8px;border:2px solid var(--ink)">Coches, edificios</td></tr>
+            <tr><td style="padding:8px;border:2px solid var(--ink)">Aluminio</td><td style="padding:8px;border:2px solid var(--ink)">Artificial</td><td style="padding:8px;border:2px solid var(--ink)">Ligero, conductor</td><td style="padding:8px;border:2px solid var(--ink)">Latas, aviones</td></tr>
+            <tr style="background:var(--soft)"><td style="padding:8px;border:2px solid var(--ink)">Vidrio</td><td style="padding:8px;border:2px solid var(--ink)">Artificial</td><td style="padding:8px;border:2px solid var(--ink)">Transparente, frágil</td><td style="padding:8px;border:2px solid var(--ink)">Ventanas, botellas</td></tr>
+            <tr><td style="padding:8px;border:2px solid var(--ink)">PVC</td><td style="padding:8px;border:2px solid var(--ink)">Sintético</td><td style="padding:8px;border:2px solid var(--ink)">Aislante, impermeable</td><td style="padding:8px;border:2px solid var(--ink)">Tuberías, cables</td></tr>
+            <tr style="background:var(--soft)"><td style="padding:8px;border:2px solid var(--ink)">Algodón</td><td style="padding:8px;border:2px solid var(--ink)">Natural</td><td style="padding:8px;border:2px solid var(--ink)">Flexible, transpirable</td><td style="padding:8px;border:2px solid var(--ink)">Ropa, vendas</td></tr>
+            <tr><td style="padding:8px;border:2px solid var(--ink)">Cerámica</td><td style="padding:8px;border:2px solid var(--ink)">Artificial</td><td style="padding:8px;border:2px solid var(--ink)">Resistente al calor</td><td style="padding:8px;border:2px solid var(--ink)">Tejas, vajilla</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+  </div>
+
+  <!-- ====== FASE 3 : EMPAREJA ====== -->
+  <div id="fase3" class="tab-content">
+    <div class="panel">
+      <div class="panel-intro">
+        <p>Empareja cada <strong>material</strong> con la <strong>propiedad</strong> que mejor lo describe. Pulsa primero uno de la izquierda y después su pareja en la derecha.</p>
+      </div>
+
+      <h3>Juego: empareja material y propiedad</h3>
+      <p style="color:var(--muted);margin-bottom:14px">Aciertos: <strong id="matchScore">0</strong> / 6</p>
+
+      <div class="match-area">
+        <div class="match-col">
+          <h4>Materiales</h4>
+          <div id="matchLeft"></div>
+        </div>
+        <div class="match-col">
+          <h4>Propiedades</h4>
+          <div id="matchRight"></div>
+        </div>
+      </div>
+
+      <div class="match-feedback" id="matchFeedback"></div>
+
+      <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn ghost" onclick="resetMatch()">↻ Reiniciar juego</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== FASE 4 : QUIZ ====== -->
+  <div id="fase4" class="tab-content">
+    <div class="panel">
+      <div class="panel-intro">
+        <p>Demuestra lo que sabes con un <strong>quiz de 6 preguntas</strong>. Al final podrás <strong>descargar los resultados</strong> de tu grupo para entregárselos al profesor.</p>
+      </div>
+
+      <div class="quiz-progress" id="quizProgress"></div>
+      <div id="quizContainer"></div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <span class="mono" style="opacity:.7">▸ Informe del equipo</span>
+        <h2 id="resultadoTitulo">¡Misión completada!</h2>
+        <p id="resultadoEquipo" style="margin-top:6px;opacity:.85"></p>
+
+        <div class="resultado-stats">
+          <div class="stat">
+            <div class="stat-num" id="statAciertos">0</div>
+            <div class="stat-label">Aciertos</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num" id="statTotal">6</div>
+            <div class="stat-label">Preguntas</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num" id="statNota">0</div>
+            <div class="stat-label">Nota /10</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num" id="statMochila">—</div>
+            <div class="stat-label">Mochila</div>
+          </div>
+        </div>
+
+        <div style="margin-top:22px;display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn warn" onclick="descargarInforme()">⬇ Descargar informe</button>
+          <button class="btn ghost" onclick="reiniciarQuiz()">↻ Volver a intentar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Juego educativo de Tecnología · 1º ESO
+    <span class="mono">Materiales técnicos · v2</span>
+  </footer>
 </div>
 
 <script>
-    // Sistema de Pestañas
-    function switchTab(tabId) {
-        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-        
-        document.getElementById(tabId).classList.add('active');
-        event.currentTarget.classList.add('active');
+/* ============================================================
+   DATOS
+============================================================ */
+
+// Iconos SVG personalizados para cada material
+const iconos = {
+  madera: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="6" y="14" width="52" height="36" rx="3" fill="#c08552" stroke="#1a1a1a" stroke-width="2.5"/>
+    <path d="M12 20 Q20 30 12 44" stroke="#6b3410" stroke-width="2" fill="none"/>
+    <path d="M24 18 Q32 32 24 46" stroke="#6b3410" stroke-width="2" fill="none"/>
+    <path d="M40 18 Q48 30 40 46" stroke="#6b3410" stroke-width="2" fill="none"/>
+    <circle cx="50" cy="28" r="2.5" fill="#6b3410"/>
+  </svg>`,
+  metal: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="10" y="18" width="44" height="28" fill="#9ca3af" stroke="#1a1a1a" stroke-width="2.5"/>
+    <path d="M10 18 L18 10 L62 10 L54 18" fill="#cbd5e1" stroke="#1a1a1a" stroke-width="2.5"/>
+    <path d="M54 18 L62 10 L62 38 L54 46" fill="#6b7280" stroke="#1a1a1a" stroke-width="2.5"/>
+    <line x1="20" y1="26" x2="44" y2="26" stroke="#1a1a1a" stroke-width="1.5"/>
+    <line x1="20" y1="34" x2="44" y2="34" stroke="#1a1a1a" stroke-width="1.5"/>
+  </svg>`,
+  plastico: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M22 12 L42 12 L44 18 L42 56 L22 56 L20 18 Z" fill="#60a5fa" stroke="#1a1a1a" stroke-width="2.5"/>
+    <rect x="26" y="6" width="12" height="8" rx="1.5" fill="#3b82f6" stroke="#1a1a1a" stroke-width="2.5"/>
+    <path d="M25 25 Q30 23 39 25" stroke="#fff" stroke-width="2" fill="none"/>
+    <circle cx="32" cy="38" r="3" fill="#1a1a1a" opacity=".5"/>
+  </svg>`,
+  ceramica: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M14 22 Q14 18 32 16 Q50 18 50 22 L48 50 Q32 54 16 50 Z" fill="#f4a261" stroke="#1a1a1a" stroke-width="2.5"/>
+    <ellipse cx="32" cy="22" rx="18" ry="4" fill="#e76f51" stroke="#1a1a1a" stroke-width="2"/>
+    <path d="M20 32 Q32 34 44 32" stroke="#1a1a1a" stroke-width="1.5" fill="none" opacity=".5"/>
+  </svg>`,
+  textil: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8 16 Q16 12 24 16 Q32 20 40 16 Q48 12 56 16 L56 50 Q48 54 40 50 Q32 46 24 50 Q16 54 8 50 Z" fill="#e9c46a" stroke="#1a1a1a" stroke-width="2.5"/>
+    <line x1="8" y1="28" x2="56" y2="28" stroke="#1a1a1a" stroke-width="1" opacity=".4"/>
+    <line x1="8" y1="38" x2="56" y2="38" stroke="#1a1a1a" stroke-width="1" opacity=".4"/>
+    <line x1="20" y1="14" x2="20" y2="52" stroke="#1a1a1a" stroke-width="1" opacity=".4"/>
+    <line x1="32" y1="14" x2="32" y2="52" stroke="#1a1a1a" stroke-width="1" opacity=".4"/>
+    <line x1="44" y1="14" x2="44" y2="52" stroke="#1a1a1a" stroke-width="1" opacity=".4"/>
+  </svg>`,
+  vidrio: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M22 8 L42 8 L40 22 Q44 28 44 36 L44 54 L20 54 L20 36 Q20 28 24 22 Z" fill="#a8dadc" stroke="#1a1a1a" stroke-width="2.5" opacity=".7"/>
+    <path d="M26 14 L30 12 L30 20" stroke="#fff" stroke-width="2" fill="none"/>
+    <ellipse cx="32" cy="42" rx="6" ry="2" fill="#fff" opacity=".5"/>
+  </svg>`,
+  papel: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M14 8 L46 8 L54 16 L54 56 L14 56 Z" fill="#fefae0" stroke="#1a1a1a" stroke-width="2.5"/>
+    <path d="M46 8 L46 16 L54 16" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
+    <line x1="20" y1="26" x2="46" y2="26" stroke="#1a1a1a" stroke-width="1.5"/>
+    <line x1="20" y1="34" x2="46" y2="34" stroke="#1a1a1a" stroke-width="1.5"/>
+    <line x1="20" y1="42" x2="38" y2="42" stroke="#1a1a1a" stroke-width="1.5"/>
+  </svg>`,
+  cuerda: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8 20 Q16 12 24 20 Q32 28 40 20 Q48 12 56 20" stroke="#b08968" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M8 32 Q16 24 24 32 Q32 40 40 32 Q48 24 56 32" stroke="#b08968" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M8 44 Q16 36 24 44 Q32 52 40 44 Q48 36 56 44" stroke="#b08968" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M8 20 Q16 12 24 20 Q32 28 40 20 Q48 12 56 20" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+    <path d="M8 32 Q16 24 24 32 Q32 40 40 32 Q48 24 56 32" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+    <path d="M8 44 Q16 36 24 44 Q32 52 40 44 Q48 36 56 44" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+  </svg>`
+};
+
+const materiales = [
+  { id:'madera', nombre:'Madera', mini:'Ligera y flota', info:'Es ligera, flota perfectamente y resiste bien la flexión. Si es fina puede romperse o pudrirse con el agua.' },
+  { id:'metal', nombre:'Metal (Acero)', mini:'Resistente, pero pesa', info:'Muy tenaz (soporta golpes) y duro, pero pesa demasiado para una balsa y se oxida con el agua del mar.' },
+  { id:'plastico', nombre:'Plástico', mini:'Impermeable', info:'100% impermeable y muy ligero (no se hunde), pero es difícil de unir de forma resistente sin herramientas.' },
+  { id:'ceramica', nombre:'Cerámica', mini:'Frágil', info:'Soporta muy bien el calor del sol, pero es frágil. Al primer golpe se romperá.' },
+  { id:'textil', nombre:'Textil / Lona', mini:'Flexible', info:'Flexible y ligero, ideal para velas o techos si se combina con ramas.' },
+  { id:'vidrio', nombre:'Vidrio', mini:'Transparente', info:'Transparente y rígido, pero extremadamente frágil. Pesa y se astilla con facilidad.' },
+  { id:'papel', nombre:'Papel / Cartón', mini:'Aislante débil', info:'Muy ligero, pero se deshace con la humedad. Útil solo en seco.' },
+  { id:'cuerda', nombre:'Cuerda', mini:'Para atar', info:'Imprescindible para unir las piezas. No es estructural, pero hace la balsa posible.' }
+];
+
+const propiedadesData = {
+  mecanicas: {
+    titulo:'🔩 Propiedades Mecánicas',
+    items:[
+      { t:'Dureza', d:'Resistencia a ser rayado. El diamante es muy duro; el yeso es blando.' },
+      { t:'Tenacidad', d:'Resistencia a romperse al recibir un golpe. El acero es tenaz; el vidrio es frágil.' },
+      { t:'Elasticidad', d:'Capacidad de recuperar la forma tras estirarlo. Ejemplo: la goma de un tirachinas.' },
+      { t:'Plasticidad', d:'Capacidad de deformarse permanentemente sin romperse. Ejemplo: la plastilina.' },
+      { t:'Maleabilidad', d:'Facilidad para formar láminas finas. Ejemplo: el papel de aluminio.' },
+      { t:'Ductilidad', d:'Facilidad para formar hilos. Ejemplo: los cables eléctricos de cobre.' }
+    ]
+  },
+  termicas:{
+    titulo:'🔥 Propiedades Térmicas',
+    items:[
+      { t:'Conductores térmicos', d:'Dejan pasar el calor rápido. Los metales, por eso las sartenes son de aluminio.' },
+      { t:'Aislantes térmicos', d:'Bloquean el calor. Madera, plástico o corcho: por eso los mangos son de plástico para no quemarte.' },
+      { t:'Dilatación', d:'Casi todos los materiales se hacen más grandes con el calor. Por eso los puentes tienen juntas de dilatación.' },
+      { t:'Punto de fusión', d:'Temperatura a la que un sólido se vuelve líquido. El hielo a 0°C, el hierro a 1538°C.' }
+    ]
+  },
+  electricas:{
+    titulo:'⚡ Propiedades Eléctricas',
+    items:[
+      { t:'Conductores eléctricos', d:'Permiten el paso de la corriente. El cobre y el aluminio, por eso los usamos en cables.' },
+      { t:'Aislantes eléctricos', d:'Impiden el paso de la corriente. El plástico, la goma o la madera seca. Por eso recubren los cables.' },
+      { t:'Semiconductores', d:'Conducen sólo en ciertas condiciones. El silicio: la base de los chips de los móviles y ordenadores.' }
+    ]
+  },
+  ecologicas:{
+    titulo:'🌍 Propiedades Ecológicas',
+    items:[
+      { t:'Reciclable', d:'Se puede reutilizar para hacer otro objeto. El vidrio, el papel o muchos metales.' },
+      { t:'Biodegradable', d:'La naturaleza lo descompone sin contaminar. La madera, el algodón o el cartón.' },
+      { t:'Tóxico', d:'Libera sustancias dañinas. Algunos plásticos o metales pesados.' },
+      { t:'Huella de carbono', d:'CO₂ que se emite al fabricarlo. El aluminio tiene una huella alta; la madera muy baja.' }
+    ]
+  },
+  esteticas:{
+    titulo:'🎨 Propiedades Estéticas',
+    items:[
+      { t:'Color', d:'Algunos materiales tienen un color propio (cobre rojizo, oro amarillo); otros se pueden pintar.' },
+      { t:'Brillo', d:'Los metales pulidos brillan; la madera o el textil suelen ser mates.' },
+      { t:'Textura', d:'Lisa (vidrio), rugosa (piedra), suave (algodón), áspera (cartón).' },
+      { t:'Transparencia', d:'Transparente (vidrio), translúcido (papel vegetal) u opaco (madera, metal).' }
+    ]
+  }
+};
+
+const matchPairs = [
+  { mat:'Cobre', prop:'Excelente conductor eléctrico' },
+  { mat:'Madera', prop:'Aislante térmico y ligera' },
+  { mat:'Vidrio', prop:'Transparente pero frágil' },
+  { mat:'Acero', prop:'Muy tenaz y duro' },
+  { mat:'Plástico', prop:'Impermeable y aislante eléctrico' },
+  { mat:'Algodón', prop:'Flexible, transpirable y biodegradable' }
+];
+
+const quizPreguntas = [
+  {
+    q:'¿Por qué las sartenes tienen el mango de plástico o madera?',
+    opts:[
+      'Porque es más barato',
+      'Porque son aislantes térmicos y no se calientan',
+      'Porque pesan menos que el metal',
+      'Porque son más bonitos'
+    ],
+    correct:1,
+    exp:'Plástico y madera son AISLANTES TÉRMICOS: bloquean el calor, así puedes sujetar la sartén sin quemarte.'
+  },
+  {
+    q:'¿Cuál de estos materiales es SINTÉTICO?',
+    opts:[ 'Madera', 'Algodón', 'PVC (plástico)', 'Mármol' ],
+    correct:2,
+    exp:'El PVC se crea en laboratorio mediante procesos químicos a partir del petróleo. Los demás son naturales.'
+  },
+  {
+    q:'¿Qué propiedad permite que el cobre se use en cables eléctricos?',
+    opts:[
+      'Su dureza',
+      'Su conductividad eléctrica',
+      'Su elasticidad',
+      'Su transparencia'
+    ],
+    correct:1,
+    exp:'El cobre es uno de los mejores conductores eléctricos, por eso es el material estrella de los cables.'
+  },
+  {
+    q:'Un material que recupera su forma al estirarlo (como una goma) tiene...',
+    opts:[ 'Dureza', 'Tenacidad', 'Elasticidad', 'Fragilidad' ],
+    correct:2,
+    exp:'La ELASTICIDAD es la propiedad de volver a la forma original tras una deformación.'
+  },
+  {
+    q:'¿Cuál de estos materiales es ARTIFICIAL (no natural ni sintético)?',
+    opts:[ 'Algodón', 'Acero', 'Mármol', 'Nailon' ],
+    correct:1,
+    exp:'El acero se OBTIENE transformando el hierro (natural). Por eso es artificial. El nailon es sintético.'
+  },
+  {
+    q:'Si quiero un material LIGERO, RECICLABLE y RESISTENTE para una lata de refresco, elegiré...',
+    opts:[ 'Vidrio', 'Aluminio', 'Madera', 'Cerámica' ],
+    correct:1,
+    exp:'El aluminio es ligero, muy resistente y se recicla infinitas veces. Por eso casi todas las latas son de aluminio.'
+  }
+];
+
+/* ============================================================
+   ESTADO
+============================================================ */
+let equipo = { nombre:'', miembros:'', clase:'', fecha:'' };
+let seleccionados = [];
+let matchState = { picked:null, matched:[], score:0 };
+let quizState = { current:0, aciertos:0, terminado:false };
+
+/* ============================================================
+   TABS
+============================================================ */
+function switchTab(ev, tabId){
+  document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el=>el.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  ev.currentTarget.classList.add('active');
+  window.scrollTo({top:document.querySelector('.tabs').offsetTop-20, behavior:'smooth'});
+}
+
+/* ============================================================
+   EQUIPO
+============================================================ */
+function guardarEquipo(){
+  equipo.nombre = document.getElementById('grupoNombre').value.trim();
+  equipo.miembros = document.getElementById('grupoMiembros').value.trim();
+  equipo.clase = document.getElementById('grupoClase').value.trim();
+  equipo.fecha = document.getElementById('grupoFecha').value;
+
+  if(!equipo.nombre){
+    alert('Pon al menos el nombre del grupo para empezar.');
+    return;
+  }
+  const lbl = document.getElementById('grupoLabel');
+  lbl.textContent = `${equipo.nombre}` + (equipo.miembros?` · ${equipo.miembros}`:'');
+
+  // pequeño feedback
+  const btn = event.currentTarget;
+  const orig = btn.textContent;
+  btn.textContent = '✓ Registrado';
+  btn.style.background = 'var(--green)';
+  setTimeout(()=>{btn.textContent=orig;btn.style.background=''},1500);
+}
+
+/* ============================================================
+   FASE 1 — Náufrago
+============================================================ */
+function renderMateriales(){
+  const grid = document.getElementById('gridMateriales');
+  grid.innerHTML = materiales.map(m=>`
+    <div class="mat-card" id="mat-${m.id}" onclick="toggleMaterial('${m.id}')">
+      <div class="checkmark">✓</div>
+      <div class="mat-icon">${iconos[m.id]||''}</div>
+      <div class="mat-name">${m.nombre}</div>
+      <div class="mat-mini">${m.mini}</div>
+    </div>
+  `).join('');
+}
+
+function toggleMaterial(id){
+  const card = document.getElementById('mat-'+id);
+  const idx = seleccionados.indexOf(id);
+  if(idx>-1){
+    seleccionados.splice(idx,1);
+    card.classList.remove('selected');
+  } else {
+    if(seleccionados.length>=3){
+      // pequeño shake visual en vez de alert
+      card.style.animation='shake .4s';
+      setTimeout(()=>card.style.animation='',400);
+      return;
     }
+    seleccionados.push(id);
+    card.classList.add('selected');
+  }
+  actualizarMochila();
+}
 
-    // Lógica del Juego
-    let seleccionados = [];
-    const descripciones = {
-        madera: '🪵 Madera: Flota y sirve para estructuras.',
-        metal: '🔩 Metal: Pesa mucho pero es ultra resistente.',
-        plastico: '🥤 Plástico: Impermeable y ligero.',
-        ceramica: '🧱 Cerámica: Muy frágil, mala idea para la balsa.',
-        textil: '⛺ Textil: Perfecto para lonas o velas de barco.'
-    };
+function actualizarMochila(){
+  const box = document.getElementById('mochilaStatus');
+  const counter = document.getElementById('mochilaCounter');
+  counter.textContent = `${seleccionados.length}/3`;
 
-    function toggleMaterial(id, info) {
-        const card = document.getElementById('mat-' + id);
-        const index = seleccionados.indexOf(id);
+  if(seleccionados.length===0){
+    box.querySelector('h3').nextElementSibling?.remove();
+    const p = document.createElement('p');
+    p.style.color='var(--muted)';
+    p.textContent='Selecciona 3 materiales para ver vuestras posibilidades de supervivencia…';
+    box.appendChild(p);
+    box.querySelectorAll('ul, .verdict').forEach(el=>el.remove());
+    return;
+  }
 
-        if (index > -1) {
-            seleccionados.splice(index, 1);
-            card.classList.remove('selected');
-        } else {
-            if (seleccionados.length >= 3) {
-                alert("¡Mochila llena! Deselecciona un material primero.");
-                return;
-            }
-            seleccionados.push(id);
-            card.classList.add('selected');
-        }
-        actualizarMochila();
+  // limpia y reconstruye
+  box.querySelectorAll('p, ul, .verdict').forEach(el=>el.remove());
+
+  const ul = document.createElement('ul');
+  ul.className='mochila-list';
+  seleccionados.forEach(id=>{
+    const m = materiales.find(x=>x.id===id);
+    const li = document.createElement('li');
+    li.innerHTML = `<span style="width:32px;height:32px;display:inline-block">${iconos[id]||''}</span><span><strong>${m.nombre}:</strong> ${m.info}</span>`;
+    ul.appendChild(li);
+  });
+  box.appendChild(ul);
+
+  if(seleccionados.length===3){
+    const v = document.createElement('div');
+    v.className='verdict';
+    const r = evaluarMochila();
+    v.classList.add(r.cls);
+    v.innerHTML = `
+      <div class="verdict-title">${r.icon} ${r.titulo}</div>
+      <p>${r.texto}</p>
+      <div class="score-bar"><div class="score-fill" style="width:${r.score}%">${r.score}%</div></div>
+    `;
+    box.appendChild(v);
+    setTimeout(()=>v.querySelector('.score-fill').style.width=r.score+'%',50);
+  } else {
+    const p = document.createElement('p');
+    p.innerHTML = `<strong>Lleváis ${seleccionados.length}/3 materiales.</strong> Sigue seleccionando.`;
+    box.appendChild(p);
+  }
+}
+
+function evaluarMochila(){
+  // Puntuación: cada material tiene aporte parcial al refugio y a la balsa
+  const aporte = {
+    madera:   { refugio:3, balsa:3, ecologia:3 },
+    metal:    { refugio:2, balsa:-2, ecologia:0 },
+    plastico: { refugio:3, balsa:3, ecologia:-2 },
+    ceramica: { refugio:1, balsa:-3, ecologia:1 },
+    textil:   { refugio:2, balsa:2, ecologia:2 },
+    vidrio:   { refugio:-1, balsa:-3, ecologia:0 },
+    papel:    { refugio:-2, balsa:-3, ecologia:1 },
+    cuerda:   { refugio:2, balsa:3, ecologia:2 }
+  };
+  let r=0, b=0, e=0;
+  seleccionados.forEach(id=>{
+    r+=aporte[id].refugio; b+=aporte[id].balsa; e+=aporte[id].ecologia;
+  });
+  const total = r+b+e;
+  const max = 24; // 3 mejores materiales: refugio 9 + balsa 9 + ecol 6 aprox
+  const score = Math.max(5, Math.min(100, Math.round((total/max)*100)));
+
+  if(score>=75) return { cls:'ok', icon:'🟢', titulo:'¡Éxito total!', texto:`Vuestro refugio será impermeable y la balsa flotará. Combinaréis bien materiales ligeros, impermeables y resistentes. ¡Conseguiréis escapar!`, score };
+  if(score>=45) return { cls:'mid', icon:'🟡', titulo:'Supervivencia regular', texto:`Conseguiréis hacer un refugio aceptable, pero la balsa os va a costar mucho con esta combinación. Revisad las propiedades mecánicas y la flotación.`, score };
+  return { cls:'bad', icon:'🔴', titulo:'¡Misión en peligro!', texto:`Los materiales elegidos son demasiado pesados, frágiles o se estropearán con el agua. Volved a pensar en qué propiedades necesitan un refugio y una balsa.`, score };
+}
+
+/* ============================================================
+   FASE 2 — Teoría
+============================================================ */
+function showProp(btn, key){
+  document.querySelectorAll('.prop-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const data = propiedadesData[key];
+  document.getElementById('propTitulo').textContent = data.titulo;
+  document.getElementById('propLista').innerHTML = data.items
+    .map(i=>`<li><strong>${i.t}:</strong> ${i.d}</li>`).join('');
+  document.getElementById('infoProp').style.display='block';
+}
+
+/* ============================================================
+   FASE 3 — Emparejar
+============================================================ */
+function renderMatch(){
+  const left = document.getElementById('matchLeft');
+  const right = document.getElementById('matchRight');
+
+  // mezclar el orden de las parejas (la derecha distinta de la izquierda)
+  const mats = [...matchPairs].map((p,i)=>({txt:p.mat, idx:i}));
+  const props = [...matchPairs].map((p,i)=>({txt:p.prop, idx:i}))
+                               .sort(()=>Math.random()-0.5);
+
+  left.innerHTML = mats.map(m=>
+    `<div class="match-item" data-side="left" data-idx="${m.idx}" onclick="pickMatch(this)">${m.txt}</div>`
+  ).join('');
+  right.innerHTML = props.map(p=>
+    `<div class="match-item" data-side="right" data-idx="${p.idx}" onclick="pickMatch(this)">${p.txt}</div>`
+  ).join('');
+
+  matchState = { picked:null, matched:[], score:0 };
+  document.getElementById('matchScore').textContent='0';
+  document.getElementById('matchFeedback').style.display='none';
+}
+
+function pickMatch(el){
+  if(el.classList.contains('matched')) return;
+
+  if(!matchState.picked){
+    // primer click: solo si es de la izquierda
+    if(el.dataset.side!=='left') return;
+    document.querySelectorAll('.match-item.picked').forEach(x=>x.classList.remove('picked'));
+    el.classList.add('picked');
+    matchState.picked = el;
+    return;
+  }
+
+  // segundo click
+  if(el.dataset.side==='left'){
+    // cambia la selección
+    matchState.picked.classList.remove('picked');
+    el.classList.add('picked');
+    matchState.picked = el;
+    return;
+  }
+
+  // intentar emparejar
+  const fb = document.getElementById('matchFeedback');
+  if(el.dataset.idx === matchState.picked.dataset.idx){
+    el.classList.add('matched');
+    matchState.picked.classList.remove('picked');
+    matchState.picked.classList.add('matched');
+    matchState.matched.push(el.dataset.idx);
+    matchState.score++;
+    document.getElementById('matchScore').textContent = matchState.score;
+    fb.style.display='block';
+    fb.style.background='#c7f9cc';
+    fb.textContent = `✓ ¡Correcto! ${matchPairs[el.dataset.idx].mat} → ${matchPairs[el.dataset.idx].prop}`;
+
+    if(matchState.score===matchPairs.length){
+      fb.style.background='var(--accent)';
+      fb.innerHTML = `🏆 <strong>¡Habéis emparejado todos!</strong> Pasad al Quiz Final para terminar.`;
     }
+    matchState.picked = null;
+  } else {
+    el.classList.add('wrong');
+    matchState.picked.classList.add('wrong');
+    fb.style.display='block';
+    fb.style.background='#ffccd5';
+    fb.textContent = `✗ No es correcto. ${matchPairs[matchState.picked.dataset.idx].mat} no se asocia con esa propiedad. ¡Inténtalo de nuevo!`;
+    setTimeout(()=>{
+      el.classList.remove('wrong');
+      matchState.picked?.classList.remove('wrong','picked');
+      matchState.picked = null;
+    },600);
+  }
+}
 
-    function actualizarMochila() {
-        const box = document.getElementById('mochila-status');
-        if (seleccionados.length === 0) {
-            box.innerHTML = `<h3>🎒 Vuestra mochila actual:</h3><p>Selecciona 3 materiales arriba para ver vuestras probabilidades...</p>`;
-            return;
-        }
+function resetMatch(){
+  renderMatch();
+}
 
-        let listaTxt = "<ul>";
-        seleccionados.forEach(id => {
-            listaTxt += `<li>${descripciones[id]}</li>`;
-        });
-        listaTxt += "</ul>";
+/* ============================================================
+   FASE 4 — Quiz final
+============================================================ */
+function renderProgress(){
+  const cont = document.getElementById('quizProgress');
+  cont.innerHTML = quizPreguntas.map((_,i)=>{
+    let cls = '';
+    if(i<quizState.current) cls='done';
+    if(i===quizState.current) cls='current';
+    return `<div class="quiz-dot ${cls}"></div>`;
+  }).join('');
+}
 
-        let diagnostico = "";
-        if (seleccionados.length === 3) {
-            if (seleccionados.includes('madera') && seleccionados.includes('plastico') && seleccionados.includes('textil')) {
-                diagnostico = "<p class='alert-success'>🟢 ¡ÉXITO TOTAL! Tenéis madera para flotar, plástico para impermeabilizar y textil para la vela. ¡Escaparéis sanos y salvos!</p>";
-            } else if (seleccionados.includes('metal') && seleccionados.includes('ceramica')) {
-                diagnostico = "<p class='alert-danger'>🔴 ¡PELIGRO! El metal hundirá vuestra balsa y la cerámica se romperá en el viaje. Tenéis que repensar las propiedades mecánicas de vuestra mochila.</p>";
-            } else {
-                diagnostico = "<p style='color: #d97706; font-weight:bold;'>🟡 SUPERVIVENCIA REGULAR: Conseguiréis hacer un refugio aceptable, pero construir la balsa os va a costar muchísimo con esa combinación. ¡Justificad vuestra estrategia!</p>";
-            }
-        } else {
-            diagnostico = `<p>Lleváis ${seleccionados.length}/3 materiales elegidos. Sigue seleccionando.</p>`;
-        }
+function renderQuiz(){
+  renderProgress();
+  if(quizState.terminado){
+    document.getElementById('quizContainer').innerHTML='';
+    mostrarResultado();
+    return;
+  }
+  const p = quizPreguntas[quizState.current];
+  const c = document.getElementById('quizContainer');
+  c.innerHTML = `
+    <div class="quiz-question">
+      <span class="q-num">Pregunta ${quizState.current+1} / ${quizPreguntas.length}</span>
+      <h3>${p.q}</h3>
+      <div class="quiz-options">
+        ${p.opts.map((o,i)=>`<button class="quiz-opt" onclick="responderQuiz(${i})">${o}</button>`).join('')}
+      </div>
+      <div class="quiz-feedback" id="quizFb"></div>
+      <div style="margin-top:14px;text-align:right">
+        <button class="btn primary" id="btnNext" style="display:none" onclick="siguienteQuiz()">Siguiente ▸</button>
+      </div>
+    </div>
+  `;
+}
 
-        box.innerHTML = `<h3>🎒 Vuestra mochila actual:</h3>${listaTxt}${diagnostico}`;
-    }
+function responderQuiz(idx){
+  const p = quizPreguntas[quizState.current];
+  const opts = document.querySelectorAll('.quiz-opt');
+  const fb = document.getElementById('quizFb');
 
-    // Lógica de teoría
-    function showProp(id, titulo, cuerpo) {
-        const display = document.getElementById('display-propiedad');
-        document.getElementById('prop-titulo').innerText = titulo;
-        document.getElementById('prop-cuerpo').innerHTML = cuerpo;
-        display.style.display = 'block';
-    }
+  opts.forEach((o,i)=>{
+    if(i===p.correct) o.classList.add('correct');
+    if(i===idx && i!==p.correct) o.classList.add('wrong');
+    o.style.pointerEvents='none';
+  });
 
-    // Quiz
-    function checkQuiz(isCorrect) {
-        const res = document.getElementById('quiz-res');
-        if(isCorrect) {
-            res.innerHTML = "<p class='alert-success'>¡Exacto! El cobre y el aluminio permiten que la electricidad viaje sin resistencia, mientras que el plástico es un aislante.</p>";
-        } else {
-            res.innerHTML = "<p class='alert-danger'>¡Oh, no es correcto! El plástico es más ligero, pero recuerda que necesitamos transportar energía, por lo que buscamos conductividad.</p>";
-        }
-    }
+  if(idx===p.correct){
+    quizState.aciertos++;
+    fb.className='quiz-feedback ok';
+    fb.innerHTML = `<strong>✓ ¡Correcto!</strong> ${p.exp}`;
+  } else {
+    fb.className='quiz-feedback no';
+    fb.innerHTML = `<strong>✗ Casi.</strong> ${p.exp}`;
+  }
+  document.getElementById('btnNext').style.display='inline-block';
+}
+
+function siguienteQuiz(){
+  quizState.current++;
+  if(quizState.current>=quizPreguntas.length){
+    quizState.terminado = true;
+  }
+  renderQuiz();
+}
+
+function mostrarResultado(){
+  document.getElementById('resultadoFinal').style.display='block';
+  const aciertos = quizState.aciertos;
+  const total = quizPreguntas.length;
+  const nota = Math.round((aciertos/total)*100)/10;
+
+  document.getElementById('statAciertos').textContent = aciertos;
+  document.getElementById('statTotal').textContent = total;
+  document.getElementById('statNota').textContent = nota.toFixed(1);
+  const mochilaResumen = seleccionados.length===3 ? evaluarMochila().score+'%' : '—';
+  document.getElementById('statMochila').textContent = mochilaResumen;
+
+  const titulo = aciertos===total ? '🏆 ¡Perfecto!' :
+                 aciertos>=4 ? '👏 ¡Buen trabajo!' :
+                 '📚 ¡A repasar!';
+  document.getElementById('resultadoTitulo').textContent = titulo;
+
+  const equipoTxt = equipo.nombre
+    ? `Equipo: ${equipo.nombre}${equipo.miembros?' · '+equipo.miembros:''}${equipo.clase?' · '+equipo.clase:''}`
+    : 'Equipo sin registrar (rellena la cabecera para incluirlo en el informe)';
+  document.getElementById('resultadoEquipo').textContent = equipoTxt;
+
+  // scroll suave
+  setTimeout(()=>{
+    document.getElementById('resultadoFinal').scrollIntoView({behavior:'smooth', block:'center'});
+  },200);
+}
+
+function reiniciarQuiz(){
+  quizState = { current:0, aciertos:0, terminado:false };
+  document.getElementById('resultadoFinal').style.display='none';
+  renderQuiz();
+}
+
+/* ============================================================
+   INFORME — Descarga
+============================================================ */
+function descargarInforme(){
+  const aciertos = quizState.aciertos;
+  const total = quizPreguntas.length;
+  const nota = ((aciertos/total)*10).toFixed(1);
+  const mochila = seleccionados.length===3
+    ? seleccionados.map(id=>materiales.find(m=>m.id===id).nombre).join(', ')
+    : '— mochila no completada —';
+  const evalM = seleccionados.length===3 ? evaluarMochila() : null;
+
+  const ahora = new Date();
+  const fechaTxt = equipo.fecha || ahora.toLocaleDateString('es-ES');
+
+  const html = `<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><title>Informe — ${equipo.nombre||'Grupo'}</title>
+<style>
+body{font-family:Georgia, serif;max-width:780px;margin:30px auto;padding:30px;color:#1a1a1a;background:#fffdf6}
+h1{border-bottom:3px solid #e63946;padding-bottom:8px;color:#1d3557}
+h2{color:#1d3557;margin-top:28px}
+.box{background:#f1ede2;border:2px solid #1a1a1a;padding:14px 18px;margin:14px 0}
+.stat{display:inline-block;background:#1d3557;color:#fff;padding:8px 16px;margin:4px;border:2px solid #1a1a1a;font-weight:bold}
+.ok{color:#2a9d8f}.no{color:#d62828}
+table{width:100%;border-collapse:collapse;margin-top:10px}
+td,th{border:1.5px solid #1a1a1a;padding:8px;text-align:left;font-size:14px}
+th{background:#1a1a1a;color:#fff}
+.footer{margin-top:30px;font-size:12px;color:#666;text-align:center;border-top:1px solid #ccc;padding-top:12px}
+</style></head><body>
+
+<h1>📋 Informe del equipo — Materiales Técnicos</h1>
+
+<div class="box">
+  <strong>Grupo:</strong> ${equipo.nombre||'(sin nombre)'}<br>
+  <strong>Miembros:</strong> ${equipo.miembros||'(sin indicar)'}<br>
+  <strong>Clase:</strong> ${equipo.clase||'—'}<br>
+  <strong>Fecha:</strong> ${fechaTxt}
+</div>
+
+<h2>🎯 Resultados del Quiz</h2>
+<div class="stat">Aciertos: ${aciertos}/${total}</div>
+<div class="stat">Nota: ${nota}/10</div>
+
+<h2>🎒 Fase 1 — El Naufragio</h2>
+<p><strong>Materiales elegidos:</strong> ${mochila}</p>
+${evalM?`<p><strong>Veredicto:</strong> <span class="${evalM.cls==='ok'?'ok':evalM.cls==='bad'?'no':''}">${evalM.titulo} (${evalM.score}%)</span></p>
+<p>${evalM.texto}</p>`:''}
+
+<h2>📝 Detalle de respuestas</h2>
+<table>
+  <tr><th>#</th><th>Pregunta</th><th>Correcta</th></tr>
+  ${quizPreguntas.map((p,i)=>`<tr><td>${i+1}</td><td>${p.q}</td><td>${p.opts[p.correct]}</td></tr>`).join('')}
+</table>
+
+<div class="footer">Generado por el juego de Materiales Técnicos · 1º ESO · ${ahora.toLocaleString('es-ES')}</div>
+</body></html>`;
+
+  const blob = new Blob([html], {type:'text/html;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  const nombre = (equipo.nombre||'grupo').replace(/[^a-z0-9]+/gi,'_').toLowerCase();
+  a.download = `informe_${nombre}_${ahora.toISOString().slice(0,10)}.html`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+/* ============================================================
+   INIT
+============================================================ */
+document.addEventListener('DOMContentLoaded', ()=>{
+  // fecha de hoy por defecto
+  document.getElementById('grupoFecha').valueAsDate = new Date();
+  renderMateriales();
+  renderMatch();
+  renderQuiz();
+});
 </script>
 
 </body>
